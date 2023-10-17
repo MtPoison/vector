@@ -8,10 +8,12 @@ public:
     U y;
 
     Vector(T x, U y) : x(x), y(y) {}
+
     Vector(double magnitude) {
         x = static_cast<T>(magnitude);
         y = static_cast<U>(magnitude);
     }
+
     double magnetude() {
         return sqrt(x * x + y * y);
     }
@@ -60,6 +62,19 @@ public:
         Vector<T, U> result = Left - Right;
         return result.magnetude();
     }
+
+    template<typename T, typename U>
+    Vector<T, U> scaleVector(Vector<T, U>& a) {
+        double choix = 0;
+        std::cout << "Combien veux-tu multiplier ton vecteur ?" << std::endl;
+        std::cin >> choix;
+
+        T nouveauX = a.x * choix;
+        U nouveauY = a.y * choix;
+
+        return Vector<T, U>(nouveauX, nouveauY);
+    }
+
 };
 
 template<typename T, typename U>
@@ -88,7 +103,7 @@ int main() {
 
     Vector<int, int> Left(1, 2);
     Vector<int, int> Right(2, 2);
-    Vector<int, int> resultat = vector.distanceVector(Left, Right);
+    Vector<int, int> resultat = vector.scaleVector(Left);
 
     std::cout << "Vecteur 1 : (" << Left.x << ", " << Left.y << ")" << std::endl;
     std::cout << "Vecteur 2 : (" << Right.x << ", " << Right.y << ")" << std::endl;
